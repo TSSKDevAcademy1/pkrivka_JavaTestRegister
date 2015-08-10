@@ -114,7 +114,13 @@ public class ConsoleUI {
 		String name = readLine();
 		System.out.println("Enter Phone Number: ");
 		String phoneNumber = readLine();
-		register.addPerson(new Person(name, phoneNumber));
+		if (register.findPersonByName(name) != null
+				&& register.findPersonByName(name).getPhoneNumber().equals(phoneNumber)) {
+			System.out.println("Zadany pouzivatel uz existuje!!!");
+		} else {
+			register.addPerson(new Person(name, phoneNumber));
+		}
+
 	}
 
 	/**
@@ -131,7 +137,7 @@ public class ConsoleUI {
 		System.out.println("Enter index: ");
 		int index = Integer.parseInt(readLine());
 		Person person = register.getPerson(index - 1);
-		System.out.format("%3s", index + ". "+person+"\n");
+		System.out.format("%3s", index + ". " + person + "\n");
 		System.out.println("Enter name: ");
 		String meno = readLine();
 		System.out.println("Enter phone number: ");

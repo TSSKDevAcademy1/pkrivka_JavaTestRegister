@@ -77,13 +77,14 @@ public class Person {
 	 *         otherwise
 	 */
 	private boolean isValidPhoneNumber(String phoneNumber) {
-		Pattern p = Pattern.compile("([0-9]){10}");
-		Matcher matcher = p.matcher(phoneNumber);
-		if (matcher.matches()) {
-			return true;
-		} else {
-			return false;
-		}
+		return phoneNumber.matches("([0-9]){10}");
+//		Pattern p = Pattern.compile("([0-9]){10}");
+//		Matcher matcher = p.matcher(phoneNumber);
+//		if (matcher.matches()) {
+//			return true;
+//		} else {
+//			return false;
+//		}
 	}
 
 	/**

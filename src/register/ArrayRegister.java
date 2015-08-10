@@ -75,20 +75,8 @@ public class ArrayRegister implements Register {
 	 */
 	@Override
 	public void addPerson(Person person) {
-		if (count == 0) {
 			persons[count] = person;
 			count++;
-		} else {
-			for (int i = 0; i < count; i++) {
-				if (person.getName().equals(persons[i].getName())
-						&& person.getPhoneNumber().equals(persons[i].getPhoneNumber())) {
-					System.out.println("Dana osoba uz existuje!");
-					return;
-				}
-			}
-			persons[count] = person;
-			count++;
-		}
 	}
 
 	/**
@@ -134,11 +122,17 @@ public class ArrayRegister implements Register {
 	public void removePerson(Person person) {
 		for (int i = 0; i < count; i++) {
 			if (person.equals(persons[i])) {
-				for (int j = i; j < count; j++) {
-					persons[j] = persons[j + 1];
+				if (i==count-1){
+					persons[i]=null;
 				}
-				--count;
+				else 
+				persons[i]=persons[count-1];				
+//				for (int j = i; j < count; j++) {
+//					persons[j] = persons[j + 1];
+//				}
+//				count--;
 			}
 		}
+		--count;
 	}
 }

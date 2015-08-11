@@ -1,17 +1,24 @@
 package register;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.util.Formatter;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /**
  * User interface of the application.
  */
-public class ConsoleUI {
+public class ConsoleUI implements Serializable {
 	/** register.Register of persons. */
 	private Register register;
 
+	private RegisterLoader reg = new RegisterLoader();
 	/**
 	 * In JDK 6 use Console class instead.
 	 * 
@@ -27,10 +34,18 @@ public class ConsoleUI {
 	};
 
 	public ConsoleUI(Register register) {
+
 		this.register = register;
 	}
 
-	public void run() {
+	public ConsoleUI() throws FileNotFoundException, ClassNotFoundException, IOException {
+
+		this.register = reg.registerLoad();
+	}
+
+	public void run() throws IOException, ClassNotFoundException {
+		reg.registerFill(register);
+
 		while (true) {
 			switch (showMenu()) {
 			case PRINT:
@@ -49,6 +64,7 @@ public class ConsoleUI {
 				findInRegister();
 				break;
 			case EXIT:
+				reg.writeRegister(register);
 				return;
 			}
 		}

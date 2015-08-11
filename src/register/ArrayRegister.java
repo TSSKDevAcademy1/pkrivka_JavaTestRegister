@@ -1,9 +1,11 @@
 package register;
 
+import java.io.Serializable;
+
 /**
  * register.Person register.
  */
-public class ArrayRegister implements Register {
+public class ArrayRegister implements Register,Serializable {
 	/** register.Person array. */
 	private Person[] persons;
 

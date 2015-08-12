@@ -1,15 +1,11 @@
 package register;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.util.Formatter;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Formatter;
 
 /**
  * User interface of the application.
@@ -18,7 +14,8 @@ public class ConsoleUI implements Serializable {
 	/** register.Register of persons. */
 	private Register register;
 
-	private RegisterLoader reg = new RegisterLoader();
+	private Registerable reg = new FileRegisterLoader();
+	private Registerable regDat = new DatabaseRegisterLoader();
 	/**
 	 * In JDK 6 use Console class instead.
 	 * 
@@ -38,13 +35,23 @@ public class ConsoleUI implements Serializable {
 		this.register = register;
 	}
 
-	public ConsoleUI() throws FileNotFoundException, ClassNotFoundException, IOException {
+	public ConsoleUI() throws Exception {
+		String source = "";
+		while (!("1".equals(source)) || !("2".equals(source))) {
+			System.out.println("Vyber si zdroj pre nacitanie registra:\n1.) subor\n2.) databaza");
+			source = readLine();
+			if ("1".equals(source)) {
+				this.register = reg.registerLoad();
+			} else if ("2".equals(source)) {
+				this.register = regDat.registerLoad();
+			} else
+				System.out.println("Zadal si zlu moznost!");
+		}
 
-		this.register = reg.registerLoad();
 	}
 
-	public void run() throws IOException, ClassNotFoundException {
-		reg.registerFill(register);
+	public void run() throws Exception {
+		// reg.registerFill(register);
 
 		while (true) {
 			switch (showMenu()) {
@@ -64,7 +71,8 @@ public class ConsoleUI implements Serializable {
 				findInRegister();
 				break;
 			case EXIT:
-				reg.writeRegister(register);
+				// reg.writeRegister(register);
+				regDat.writeRegister(register);
 				return;
 			}
 		}

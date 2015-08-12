@@ -13,6 +13,7 @@ import java.util.Formatter;
 public class ConsoleUI implements Serializable {
 	/** register.Register of persons. */
 	private Register register;
+	String source = "";
 
 	private Registerable reg = new FileRegisterLoader();
 	private Registerable regDat = new DatabaseRegisterLoader();
@@ -36,14 +37,16 @@ public class ConsoleUI implements Serializable {
 	}
 
 	public ConsoleUI() throws Exception {
-		String source = "";
-		while (!("1".equals(source)) || !("2".equals(source))) {
+
+		while (!"1".equals(source) || !"2".equals(source)) {
 			System.out.println("Vyber si zdroj pre nacitanie registra:\n1.) subor\n2.) databaza");
 			source = readLine();
 			if ("1".equals(source)) {
 				this.register = reg.registerLoad();
+				return;
 			} else if ("2".equals(source)) {
 				this.register = regDat.registerLoad();
+				return;
 			} else
 				System.out.println("Zadal si zlu moznost!");
 		}
@@ -71,8 +74,11 @@ public class ConsoleUI implements Serializable {
 				findInRegister();
 				break;
 			case EXIT:
-				// reg.writeRegister(register);
-				regDat.writeRegister(register);
+				if ("1".equals(source)) {
+					reg.writeRegister(register);
+				} else if ("2".equals(source)) {
+					regDat.writeRegister(register);
+				}
 				return;
 			}
 		}

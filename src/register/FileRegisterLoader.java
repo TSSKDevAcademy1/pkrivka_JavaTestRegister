@@ -40,7 +40,7 @@ public class FileRegisterLoader implements Registerable {
 		Register register = null;
 		try (FileInputStream in = new FileInputStream(FILE); ObjectInputStream si = new ObjectInputStream(in)) {
 			register = (Register) si.readObject();
-			System.out.println("Data uspesne nacitane!");
+			System.out.println("Data zo suboru uspesne nacitane!");
 		} catch (Exception e) {
 //			e.printStackTrace();
 			System.out.println("Register neexistuje.");

@@ -47,6 +47,7 @@ public class DatabaseRegisterLoader implements Registerable {
 			while(rs.next()) {
 				register.addPerson(new Person(rs.getString(2),rs.getString(3)));
 	        }
+			System.out.println("Data z databazy uspesne nacitane!");
 			return register;
 		}
 		catch(SQLException e){

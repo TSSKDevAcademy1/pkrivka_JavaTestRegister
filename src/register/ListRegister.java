@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
 public class ListRegister implements Register, Serializable {
 	private List<Person> persons = new ArrayList<>();
+
 	public Iterator<Person> iterator() {
 		return persons.iterator();
 	}
@@ -39,26 +39,28 @@ public class ListRegister implements Register, Serializable {
 
 	@Override
 	public Person findPersonByName(String name) {
-		Iterator<Person> iterator=persons.iterator();
-		while (iterator.hasNext()){
-			Person p=iterator.next();
-			if (p.getName().equals(name)){
-				return p;
-			}
-		}
-		return null;
+		return persons.stream().filter(s -> s.getPhoneNumber().equals(name)).findFirst().get();
+		// Iterator<Person> iterator=persons.iterator();
+		// while (iterator.hasNext()){
+		// Person p=iterator.next();
+		// if (p.getName().equals(name)){
+		// return p;
+		// }
+		// }
+		// return null;
 	}
 
 	@Override
 	public Person findPersonByPhoneNumber(String phoneNumber) {
-		Iterator<Person> iterator=persons.iterator();
-		while (iterator.hasNext()){
-			Person p=iterator.next();
-			if (p.getPhoneNumber().equals(phoneNumber)){
-				return p;
-			}
-		}
-		return null;
+		return persons.stream().filter(s -> s.getPhoneNumber().equals(phoneNumber)).findFirst().get();
+		// Iterator<Person> iterator=persons.iterator();
+		// while (iterator.hasNext()){
+		// Person p=iterator.next();
+		// if (p.getPhoneNumber().equals(phoneNumber)){
+		// return p;
+		// }
+		// }
+		// return null;
 	}
 
 	@Override

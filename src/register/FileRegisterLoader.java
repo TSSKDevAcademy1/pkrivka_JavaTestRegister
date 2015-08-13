@@ -14,10 +14,14 @@ public class FileRegisterLoader implements Registerable {
 	private static final String FILE = "register.bin";
 
 	// Register register=new
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see register.DatabaseRegisterLoader#writeRegister(register.Register)
 	 */
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see register.Registerable#writeRegister(register.Register)
 	 */
 	@Override
@@ -29,10 +33,14 @@ public class FileRegisterLoader implements Registerable {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see register.DatabaseRegisterLoader#registerLoad()
 	 */
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see register.Registerable#registerLoad()
 	 */
 	@Override
@@ -42,8 +50,8 @@ public class FileRegisterLoader implements Registerable {
 			register = (Register) si.readObject();
 			System.out.println("Data zo suboru uspesne nacitane!");
 		} catch (Exception e) {
-//			e.printStackTrace();
-			System.out.println("Register neexistuje.");
+			// e.printStackTrace();
+			System.out.println("Subor s registrom neexistuje.");
 			System.out.println("Vyberte si typ registra pre vytvorenie:\n1) ArrayRegister\n2) ListRegister");
 			String typ = readLine();
 			if ("1".equals(typ)) {
@@ -88,10 +96,15 @@ public class FileRegisterLoader implements Registerable {
 			return null;
 		}
 	}
-/* (non-Javadoc)
- * @see register.DatabaseRegisterLoader#registerFill(register.Register)
- */
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see register.DatabaseRegisterLoader#registerFill(register.Register)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see register.Registerable#registerFill(register.Register)
 	 */
 	@Override

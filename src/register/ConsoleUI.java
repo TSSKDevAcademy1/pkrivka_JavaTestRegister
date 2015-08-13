@@ -16,6 +16,7 @@ public class ConsoleUI implements Serializable {
 	String source = "";
 
 	private Registerable reg = new FileRegisterLoader();
+	private Registerable regTxt = new TextFileRegisterLoader();
 	private Registerable regDat = new DatabaseRegisterLoader();
 	/**
 	 * In JDK 6 use Console class instead.
@@ -38,16 +39,20 @@ public class ConsoleUI implements Serializable {
 
 	public ConsoleUI() throws Exception {
 
-		while (!"1".equals(source) || !"2".equals(source)) {
-			System.out.println("Vyber si zdroj pre nacitanie registra:\n1.) subor\n2.) databaza");
+		while (!"1".equals(source) || !"2".equals(source) || !"3".equals(source)) {
+			System.out.println("Vyber si zdroj pre nacitanie registra:\n1.) subor\n2.) txt subor\n3.) databaza");
 			source = readLine();
 			if ("1".equals(source)) {
 				this.register = reg.registerLoad();
 				return;
 			} else if ("2".equals(source)) {
+				this.register = regTxt.registerLoad();
+				return;
+			} 
+			else if ("3".equals(source)) {
 				this.register = regDat.registerLoad();
 				return;
-			} else
+			}else
 				System.out.println("Zadal si zlu moznost!");
 		}
 
@@ -74,9 +79,13 @@ public class ConsoleUI implements Serializable {
 				findInRegister();
 				break;
 			case EXIT:
+				regTxt.writeRegister(register);
 				if ("1".equals(source)) {
 					reg.writeRegister(register);
 				} else if ("2".equals(source)) {
+					regTxt.writeRegister(register);
+				}
+				else if ("3".equals(source)) {
 					regDat.writeRegister(register);
 				}
 				return;
